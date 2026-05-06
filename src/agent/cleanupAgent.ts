@@ -6,6 +6,7 @@ import { log } from '../utils/logger';
 
 export class CleanupAgent {
   private readonly processedPaths = new Set<string>();
+  private readonly seenHashes = new Map<string, string>();
   private timer?: NodeJS.Timeout;
   private running = false;
 
@@ -36,7 +37,7 @@ export class CleanupAgent {
     }
 
     this.running = true;
-    const seenHashes = new Map<string, string>();
+    this.seenHashes.clear();
 
     try {
       const files = await scan(config.watchDir);
@@ -47,7 +48,7 @@ export class CleanupAgent {
           continue;
         }
 
-        const decision = await evaluate(file, seenHashes);
+        const decision = await evaluate(file, this.seenHashes);
         log('Decision', `${file.name} -> ${decision.action} (${decision.reason})`);
 
         const completed = await execute(file, decision);

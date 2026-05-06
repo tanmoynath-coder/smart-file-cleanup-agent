@@ -13,13 +13,11 @@ async function main(): Promise<void> {
   const duplicateFile = path.join(config.watchDir, 'copy.txt');
 
   await fs.promises.writeFile(oldFile, 'small old file\n');
+  await sleep(config.ageThresholdMs + 1000);
   await fs.promises.writeFile(largeFile, Buffer.alloc(config.sizeThresholdBytes + 1024, 1));
   await fs.promises.writeFile(originalFile, 'same duplicate content\n');
   await sleep(50);
   await fs.promises.writeFile(duplicateFile, 'same duplicate content\n');
-
-  const oldTime = new Date(Date.now() - config.ageThresholdMs - 1000);
-  await fs.promises.utimes(oldFile, oldTime, oldTime);
 
   log('Generate', `Created demo files in ${config.watchDir}`);
 }

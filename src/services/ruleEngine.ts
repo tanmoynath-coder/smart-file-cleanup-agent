@@ -10,7 +10,7 @@ import { config } from '../config/config';
  * First match wins and returns immediately.
  *
  * @param file - The file to evaluate
- * @param seenHashes - Map of SHA-256 hashes to original file paths (for duplicate detection).
+ * @param seenHashes - Map of SHA-256 hashes to the oldest file path seen for that content.
  *                     MUTATED as a side effect: hashes of processed files are stored here.
  * @returns A Decision object with action and reason
  */
