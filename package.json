@@ -1,0 +1,20 @@
+{
+  "name": "smart-file-cleanup-agent",
+  "version": "1.0.0",
+  "description": "Smart File Cleanup Agent - An intelligent file management system",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/src/index.js",
+    "generate": "ts-node scripts/generateTestFiles.ts"
+  },
+  "keywords": ["cleanup", "file-management", "agent"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
